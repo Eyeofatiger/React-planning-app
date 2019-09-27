@@ -1,0 +1,40 @@
+.planning-list-item{
+    font-size: 1.25rem;
+}
+
+.planning-list-item button{
+    width: 40px;
+    margin: 5px;
+}
+
+.planning-list-item-label{
+    margin-left: 1.25rem;
+    line-height: 40px;
+    cursor:pointer;
+    user-select: none;
+}
+
+.planning-list-item.done .planning-list-item-label{
+    text-decoration: line-through;
+}
+
+.planning-list-item.important .planning-list-item-label{
+    font-weight: bold;
+    color: orangered;
+}
+
+.btn-outline-success{
+    font-size: 20px;
+    padding: 0;
+    font-weight: bold;
+    color: orange;
+    background-color: rgb(114, 240, 41);
+}
+
+.btn-outline-danger{
+    font-size: 20px;
+    padding: 0;
+    font-weight: bold;
+    color: black;
+    background-color: tomato;
+}

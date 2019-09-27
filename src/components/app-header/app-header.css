@@ -1,0 +1,15 @@
+.app-header{
+    align-items: flex-end;
+}
+
+.app-header h1{
+    flex-grow: 1;
+    text-transform: uppercase;
+    color: navy;
+    font-weight: bold;
+}
+
+.app-header h2{
+    font-size: 1rem;
+    color: brown;
+}
