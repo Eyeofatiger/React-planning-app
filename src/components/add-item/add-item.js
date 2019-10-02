@@ -26,8 +26,9 @@ export default class AddItem extends Component{
                    placeholder="Add new position"
                    className="search-input form-control"
                    onChange={this.onLabelChange}
-                   value={this.state.label}/>
+                   value={this.state.label} />
             <button type="button" 
+                    onClick={this.onSubmit}
                     className="btn btn-outline-primary btn-add-item"
                     >
                         Add Item

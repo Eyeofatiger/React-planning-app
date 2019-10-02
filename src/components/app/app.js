@@ -9,8 +9,8 @@ import './app.css';
 export default class App extends Component{
 
     maxId = 10;
-
-    state = { planningData: [
+    
+  state =  { planningData: [
         this.createItem("Drink coffee"),
         this.createItem("Create react app"),
         this.createItem("Have good day")
@@ -125,7 +125,7 @@ export default class App extends Component{
       const planCount = this.state.planningData.length - doneCount;
 
     return (
-        <div className="planning-app">
+          <div className="planning-app">
           <AppHeader willDo={planCount} done={doneCount} />
           <div className="top-panel d-flex">
             <SearchPanel onSearchChange = {this.onSearchChange}/>
@@ -137,6 +137,7 @@ export default class App extends Component{
           onDeleted={ this.onDeleteItem}
           onToggleImportant={this.onToggleImportant}
           onToggleDone={this.onToggleDone}
+          
           />
           <AddItem onItemAdded = {this.addItem} />
         </div>
