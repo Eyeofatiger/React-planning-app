@@ -14,7 +14,10 @@ export default class App extends Component{
         this.createItem("Drink coffee"),
         this.createItem("Create react app"),
         this.createItem("Have good day")
-    ]};
+    ],
+    term: "",
+    filter: "all"
+  };
 
     onDeleteItem = (id)=>{
       this.setState(({planningData})=>{
@@ -40,7 +43,7 @@ export default class App extends Component{
       id: this.maxId++
     });
 
-  }
+  };
 
   addItem=(text)=>{
     const newItem = this.createItem(text);
@@ -54,7 +57,7 @@ export default class App extends Component{
         {planningData: newArr}
       );
     });
-  }
+  };
 
   onToggleImportant =(id)=>{
     this.setState(({planningData})=>{
@@ -70,7 +73,7 @@ export default class App extends Component{
       {planningData : newArr}
     )
   });
-  }
+  };
 
   onToggleDone= (id)=>{
     this.setState(({planningData})=>{
@@ -86,9 +89,37 @@ export default class App extends Component{
         {planningData : newArr}
       )
     });
-  }
+  };
+
+  onSearchChange = (term) =>{
+    this.setState({term});
+  };
+
+  onFilterChange = (filter) =>{
+    this.setState({filter});
+  };
+
+  search( items, term){
+    if(term.length === 0){
+      return items;
+    }
+    return items.filter((item)=>{
+      return item.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
+    });
+  };
+
+  filter(items, filter){
+    switch (filter){
+      case "all": return items;
+      case "active": return items.filter((item) => !item.done); 
+      case  "done" : return items.filter((item) => item.done);
+      default: return items;
+    };
+  };
 
     render(){
+      const {planningData, term, filter} = this.state;
+      const visibleData = this.filter(this.search(planningData, term), filter);
       const doneCount = this.state
                         .planningData.filter((el)=>el.done).length;
       const planCount = this.state.planningData.length - doneCount;
@@ -97,11 +128,12 @@ export default class App extends Component{
         <div className="planning-app">
           <AppHeader willDo={planCount} done={doneCount} />
           <div className="top-panel d-flex">
-            <SearchPanel />
-            <ItemStatusFilter />
+            <SearchPanel onSearchChange = {this.onSearchChange}/>
+            <ItemStatusFilter filter ={filter} 
+            onFilterChange={this.onFilterChange} />
           </div>
     
-          <PlanningList plan={this.state.planningData} 
+          <PlanningList plan={visibleData} 
           onDeleted={ this.onDeleteItem}
           onToggleImportant={this.onToggleImportant}
           onToggleDone={this.onToggleDone}
